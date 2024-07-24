@@ -1,0 +1,53 @@
+<div class="container">
+
+  <div class="row justify-content-center">
+
+    <div class="col-10 col-xl-4 col-lg-6 col-md-6">
+
+      <header class="text-center my-5">
+        <div class="mb-4">
+          <a href="/">
+            <img src="/img/brand.svg" alt="Gokku" height="100">
+          </a>
+        </div>
+        <h1>Sign up</h1>
+      </header>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          {{ if .Error }}
+          <div class="alert alert-danger" role="alert">
+            {{ .Error }}
+          </div>
+          {{ end }}
+          <form method="post" action="/signup">
+            <div class="mb-3">
+              <label for="login" class="form-label">Username</label>
+              <input type="text" class="form-control" id="login" name="login" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+              <p class="mb-0">By clicking the "Signup" button, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</p>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Signup</button>
+          </form>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body text-center">
+          <p class="mb-0">Already have an account? <a href="/login">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

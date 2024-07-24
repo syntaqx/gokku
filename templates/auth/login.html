@@ -1,0 +1,46 @@
+<div class="container">
+
+  <div class="row justify-content-center">
+
+    <div class="col-10 col-xl-4 col-lg-6 col-md-6">
+
+      <header class="text-center my-5">
+        <div class="mb-4">
+          <a href="/">
+            <img src="/img/brand.svg" alt="Gokku" height="100">
+          </a>
+        </div>
+        <h1>Sign in</h1>
+      </header>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          {{ if .Error }}
+          <div class="alert alert-danger" role="alert">
+            {{ .Error }}
+          </div>
+          {{ end }}
+          <form method="post" action="/login">
+            <div class="mb-3">
+              <label for="login" class="form-label">Username or email address</label>
+              <input type="text" class="form-control" id="login" name="login" required tabindex="1">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <a href="/password_reset" class="float-end">Forgot?</a>
+              <input type="password" class="form-control" id="password" name="password" required tabindex="2">
+            </div>
+            <button type="submit" class="btn btn-primary w-100" tabindex="3">Login</button>
+          </form>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body text-center">
+          <p class="mb-0">New? <a href="/signup">Create an account</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,83 @@
+<header class="bg-light py-5 mb-4">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1 class="m-0">Actions</h1>
+    <a href="/actions/new" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Create Action
+    </a>
+  </div>
+</header>
+<div class="container">
+  <div class="d-flex justify-content-end mb-4">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="toggleHiddenActions" onchange="toggleHiddenActions()">
+      <label class="form-check-label" for="toggleHiddenActions">Show Hidden Actions</label>
+    </div>
+  </div>
+  <div class="row">
+    {{ range .Actions }}
+    {{ if not .Hidden }}
+    <div class="col-md-4 mb-4 action-card">
+      <a href="/actions/{{ .ID }}" class="text-decoration-none text-dark">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">{{ .Name }}</h5>
+            <p class="card-text">{{ .Description }}</p>
+            <p class="card-text"><small class="text-muted">{{ .Type }}</small></p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {{ end }}
+    {{ end }}
+  </div>
+
+  <div class="hidden-actions-section d-none">
+    <h2 class="mt-5 mb-4">Hidden Actions</h2>
+    <div class="row">
+      {{ range .Actions }}
+      {{ if .Hidden }}
+      <div class="col-md-4 mb-4 action-card">
+        <a href="/actions/{{ .ID }}" class="text-decoration-none text-dark">
+          <div class="card shadow-sm bg-light">
+            <div class="card-body">
+              <h5 class="card-title">{{ .Name }}</h5>
+              <p class="card-text">{{ .Description }}</p>
+              <p class="card-text"><small class="text-muted">{{ .Type }}</small></p>
+            </div>
+          </div>
+        </a>
+      </div>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var checkBox = document.getElementById("toggleHiddenActions");
+    var hiddenActionsSection = document.querySelector(".hidden-actions-section");
+
+    // Check local storage for the toggle state
+    var hiddenActionsVisible = localStorage.getItem("hiddenActionsVisible") === "true";
+    checkBox.checked = hiddenActionsVisible;
+    if (hiddenActionsVisible) {
+      hiddenActionsSection.classList.remove("d-none");
+    } else {
+      hiddenActionsSection.classList.add("d-none");
+    }
+  });
+
+  function toggleHiddenActions() {
+    var checkBox = document.getElementById("toggleHiddenActions");
+    var hiddenActionsSection = document.querySelector(".hidden-actions-section");
+
+    if (checkBox.checked) {
+      hiddenActionsSection.classList.remove("d-none");
+      localStorage.setItem("hiddenActionsVisible", "true");
+    } else {
+      hiddenActionsSection.classList.add("d-none");
+      localStorage.setItem("hiddenActionsVisible", "false");
+    }
+  }
+</script>

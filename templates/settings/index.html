@@ -1,0 +1,130 @@
+<header class="bg-light py-5 mb-4">
+  <div class="container">
+    <h1 class="m-0">Settings</h1>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <nav id="settings-nav" class="nav flex-column">
+        <a class="nav-link" href="#profile">Profile</a>
+        <a class="nav-link" href="#emails">Emails</a>
+        <a class="nav-link" href="#password-auth">Password and authentication</a>
+        <a class="nav-link" href="#developer">Developer settings</a>
+        <a class="nav-link" href="#account">Account</a>
+      </nav>
+    </div>
+    <div class="col-md-9">
+      <form>
+        <div class="card mb-4" id="profile">
+          <div class="card-body">
+            <h3 class="card-title">Profile</h3>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4" id="emails">
+          <div class="card-body">
+            <h3 class="card-title">Emails</h3>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4" id="password-auth">
+          <div class="card-body">
+            <h3 class="card-title">Password and authentication</h3>
+            <div class="mb-3">
+              <label for="oldPassword" class="form-label">Old password</label>
+              <input type="password" class="form-control" id="oldPassword" placeholder="Enter your old password">
+            </div>
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">New password</label>
+              <input type="password" class="form-control" id="newPassword" placeholder="Enter your new password">
+            </div>
+            <div class="mb-3">
+              <label for="confirmNewPassword" class="form-label">Confirm new password</label>
+              <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirm your new password">
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4" id="developer">
+          <div class="card-body">
+            <h3 class="card-title">Developer settings</h3>
+            <div class="mb-3">
+              <label for="apiKey" class="form-label">API key</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="apiKey" value="78899f3e-4483-4cf6-93ad-42469f1eb187" placeholder="Your API key" readonly>
+                <button type="button" class="btn btn-outline-secondary" onclick="copyApiKey()">Copy</button>
+                <button type="button" class="btn btn-outline-secondary" onclick="revealApiKey()">Reveal</button>
+              </div>
+              <button type="button" class="btn btn-warning mt-2" data-bs-toggle="modal" data-bs-target="#regenerateModal">Regenerate API key</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4" id="account">
+          <div class="card-body">
+            <h3 class="card-title">Username</h3>
+            <div class="mb-3">
+              <form method="post" action="/settings">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                <button type="button" class="btn btn-primary mt-2">Chage username</button>
+              </form>
+            </div>
+            <h3 class="card-title">Delete account</h3>
+            <div class="mb-3">
+              <p class="text-danger">Warning: Deleting your account is irreversible</p>
+              <button type="button" class="btn btn-danger">Delete account</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="regenerateModal" tabindex="-1" aria-labelledby="regenerateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="regenerateModalLabel">Regenerate API key</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to regenerate your API key? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-warning">Regenerate API key</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function copyApiKey() {
+    /* Copy the API key to the clipboard */
+    var apiKey = document.getElementById("apiKey");
+    apiKey.select();
+    document.execCommand("copy");
+  }
+
+  function revealApiKey() {
+    /* Toggle the visibility of the API key */
+    var apiKey = document.getElementById("apiKey");
+    if (apiKey.type === "password") {
+      apiKey.type = "text";
+    } else {
+      apiKey.type = "password";
+    }
+  }
+</script>

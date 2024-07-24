@@ -57,7 +57,10 @@ func main() {
 
 	healthHandler := handlers.NewHealthHandler(renderer)
 	authHandler := handlers.NewAuthHandler(renderer, userRepository, store)
-	pageHandler := handlers.NewDashboardHandler(renderer)
+	pageHandler := handlers.NewPageHandler(renderer)
+	settingsHandler := handlers.NewSettingsHandler(renderer)
+	appsHandler := handlers.NewApplicationsHandler(renderer)
+	actionsHandler := handlers.NewActionsHandler(renderer)
 
 	r := chi.NewRouter()
 
@@ -75,6 +78,9 @@ func main() {
 	r.Group(func(r chi.Router) {
 		r.Use(middleware.Auth(userRepository, store))
 		pageHandler.RegisterRoutes(r)
+		settingsHandler.RegisterRoutes(r)
+		appsHandler.RegisterRoutes(r)
+		actionsHandler.RegisterRoutes(r)
 	})
 
 	// Create a route along /files that will serve contents from

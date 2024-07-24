@@ -12,7 +12,7 @@ type PageHandler struct {
 	renderer *render.Render
 }
 
-func NewDashboardHandler(renderer *render.Render) *PageHandler {
+func NewPageHandler(renderer *render.Render) *PageHandler {
 	return &PageHandler{renderer: renderer}
 }
 
